@@ -15,8 +15,8 @@ def _polyfill_bazel_features_impl(rctx):
     # An empty string is treated as a "dev version", which is greater than anything.
     bazel_version = native.bazel_version or "999999.999999.999999"
     version_parts = bazel_version.split(".")
-    if len(version_parts) != 3:
-        fail("invalid Bazel version '{}': got {} dot-separated segments, want 3".format(bazel_version, len(version_parts)))
+    if len(version_parts) < 2:
+        fail("invalid Bazel version '{}': got {} dot-separated segments, want at least 2".format(bazel_version, len(version_parts)))
     major_version_int = int(version_parts[0])
     minor_version_int = int(version_parts[1])
 
